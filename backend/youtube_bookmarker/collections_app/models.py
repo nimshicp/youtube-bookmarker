@@ -6,7 +6,8 @@ class Collection(models.Model):
 
     user = models.ForeignKey(
         "accounts.User",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="collections"
     )
 
     name = models.CharField(max_length=255)
@@ -36,7 +37,8 @@ class CollectionVideo(models.Model):
 
     collection = models.ForeignKey(
         Collection,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="videos"
     )
 
     video_id = models.CharField(
@@ -52,3 +54,9 @@ class CollectionVideo(models.Model):
     added_at = models.DateTimeField(
         auto_now_add=True
     )
+
+    class Meta:
+        unique_together = (
+            "collection",
+            "video_id"
+        )

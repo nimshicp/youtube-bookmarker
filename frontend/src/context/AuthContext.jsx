@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getUser } from '../api/auth';
 
@@ -10,33 +10,35 @@ export const AuthProvider = ({ children }) => {
     !!localStorage.getItem('access_token')
   );
 
+  // Define logout BEFORE useEffect so the closure captures it correctly
+  const logout = useCallback(() => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    setIsAuthenticated(false);
+    queryClient.removeQueries({ queryKey: ['user'] });
+  }, [queryClient]);
+
   const { data: user, isLoading, error } = useQuery({
     queryKey: ['user'],
     queryFn: getUser,
-    enabled: isAuthenticated, // Only fetch if we have a token
+    enabled: isAuthenticated,
     retry: false,
+    staleTime: 5 * 60 * 1000, // Don't refetch for 5 mins — prevents false logouts
   });
 
   useEffect(() => {
     if (error) {
-      // If the token is invalid or expired
+      // Token is invalid or expired — clear session
       logout();
     }
-  }, [error]);
+  }, [error, logout]);
 
-  const login = (accessToken, refreshToken, userData) => {
+  const login = useCallback((accessToken, refreshToken, userData) => {
     localStorage.setItem('access_token', accessToken);
     localStorage.setItem('refresh_token', refreshToken);
     setIsAuthenticated(true);
     queryClient.setQueryData(['user'], userData);
-  };
-
-  const logout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    setIsAuthenticated(false);
-    queryClient.removeQueries(['user']);
-  };
+  }, [queryClient]);
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, logout }}>

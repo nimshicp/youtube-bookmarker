@@ -24,4 +24,16 @@ urlpatterns = [
         'api/auth/',
         include('accounts.urls')
     ),
+    path(
+        "api/videos/",
+        include("videos.urls")
+    ),
+    path(
+    "api/bookmarks/",
+    include("bookmarks.urls")
+),
+path(
+        'api/collections/',
+        include('collections_app.urls')
+    ),
 ]
