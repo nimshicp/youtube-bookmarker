@@ -31,12 +31,12 @@ export default function BookmarksPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-8 relative overflow-hidden">
+    <div className="min-h-screen bg-neutral-950 text-white px-4 py-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <nav className="max-w-7xl mx-auto flex justify-between items-center mb-16 relative z-10">
-        <div className="flex items-center gap-6">
+      <nav className="max-w-7xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between md:items-center mb-8 sm:mb-12 lg:mb-16 relative z-10">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6 w-full md:w-auto">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
               <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,14 +46,14 @@ export default function BookmarksPage() {
             <span className="font-bold text-xl tracking-tight hidden sm:block">YouTube Bookmarker</span>
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-2 sm:gap-4">
             <Link to="/" className="text-neutral-400 hover:text-white transition-colors font-medium">Search</Link>
             <span className="text-white font-medium border-b-2 border-blue-500 pb-1">Bookmarks</span>
             <Link to="/collections" className="text-neutral-400 hover:text-white transition-colors font-medium">Collections</Link>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-3 sm:gap-4 w-full md:w-auto">
           {user && (
             <div className="flex items-center gap-3 bg-neutral-900/80 px-4 py-2 rounded-full border border-neutral-800 backdrop-blur-md">
               <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full" />
@@ -62,7 +62,7 @@ export default function BookmarksPage() {
           )}
           <button 
             onClick={logout}
-            className="px-6 py-2.5 bg-neutral-800/80 hover:bg-neutral-700 text-white text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer backdrop-blur-md"
+            className="px-4 sm:px-6 py-2.5 bg-neutral-800/80 hover:bg-neutral-700 text-white text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer backdrop-blur-md"
           >
             Sign out
           </button>
@@ -70,8 +70,8 @@ export default function BookmarksPage() {
       </nav>
 
       <main className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
-        <div className="w-full flex flex-col items-start mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
+        <div className="w-full flex flex-col items-start mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
             My Saved Videos
           </h1>
           <p className="text-neutral-400">
@@ -98,7 +98,7 @@ export default function BookmarksPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {bookmarks && bookmarks.map((bookmark) => (
               <div 
                 key={bookmark.id} 
@@ -112,7 +112,7 @@ export default function BookmarksPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                   
-                  <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                  <div className="absolute top-3 right-3 flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                      {/* Add to Collection Button */}
                     <button
                       onClick={() => setSelectedVideoForCollection({
@@ -141,11 +141,11 @@ export default function BookmarksPage() {
                     </button>
                   </div>
 
-                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium text-white">
+                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm px-2 py-1 rounded text-[10px] sm:text-xs font-medium text-white">
                     {new Date(bookmark.published_at).toLocaleDateString()}
                   </div>
                 </div>
-                <div className="p-5 flex flex-col flex-grow">
+                <div className="p-4 sm:p-5 flex flex-col flex-grow">
                   <h3 className="font-semibold text-white mb-2 line-clamp-2 leading-snug">
                     {bookmark.title}
                   </h3>

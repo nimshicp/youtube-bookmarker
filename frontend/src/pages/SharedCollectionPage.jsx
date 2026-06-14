@@ -41,28 +41,28 @@ export default function SharedCollectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-8 relative overflow-hidden">
+    <div className="min-h-screen bg-neutral-950 text-white px-4 py-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Header */}
-      <header className="max-w-7xl mx-auto mb-12 relative z-10 flex items-center gap-4">
+      <header className="max-w-7xl mx-auto mb-8 sm:mb-12 relative z-10 flex items-center gap-4 flex-wrap">
         <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30 flex-shrink-0">
           <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
           </svg>
         </div>
-        <span className="font-bold text-xl tracking-tight">YouTube Bookmarker</span>
+        <span className="font-bold text-lg sm:text-xl tracking-tight">YouTube Bookmarker</span>
         <span className="text-neutral-600 font-light">|</span>
         <span className="text-neutral-400 text-sm">Shared Collection</span>
       </header>
 
       <main className="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
         {/* Collection Info Banner */}
-        <div className="w-full bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-neutral-800 rounded-2xl p-8 mb-8 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="w-full bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-neutral-800 rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <p className="text-xs font-semibold text-blue-400 uppercase tracking-widest mb-2">Shared Collection</p>
-            <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent mb-2">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent mb-2">
               {collection.name}
             </h1>
             <p className="text-neutral-400">
@@ -80,8 +80,8 @@ export default function SharedCollectionPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="w-full mb-10 relative group">
-          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+        <div className="w-full mb-8 sm:mb-10 relative group">
+          <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none">
             <svg className="h-5 w-5 text-neutral-500 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -91,12 +91,12 @@ export default function SharedCollectionPage() {
             placeholder="Search videos in this collection..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="block w-full pl-14 pr-5 py-4 bg-neutral-900/60 border border-neutral-800 rounded-2xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 backdrop-blur-xl transition-all"
+            className="block w-full pl-12 sm:pl-14 pr-10 sm:pr-5 py-4 bg-neutral-900/60 border border-neutral-800 rounded-2xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 backdrop-blur-xl transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute inset-y-0 right-0 pr-5 flex items-center text-neutral-500 hover:text-white transition-colors"
+              className="absolute inset-y-0 right-0 pr-4 sm:pr-5 flex items-center text-neutral-500 hover:text-white transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -125,7 +125,7 @@ export default function SharedCollectionPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {videos && videos.map((video) => (
               <a
                 key={video.id}
@@ -149,8 +149,8 @@ export default function SharedCollectionPage() {
                     </div>
                   </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-semibold text-white line-clamp-2 leading-snug group-hover:text-blue-400 transition-colors">
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-semibold text-white line-clamp-2 leading-snug text-sm sm:text-base group-hover:text-blue-400 transition-colors">
                     {video.title}
                   </h3>
                 </div>

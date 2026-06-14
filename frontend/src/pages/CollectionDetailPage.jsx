@@ -45,19 +45,19 @@ export default function CollectionDetailPage() {
   const videos = data?.videos;
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-8 relative overflow-hidden">
+    <div className="min-h-screen bg-neutral-950 text-white px-4 py-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <nav className="max-w-7xl mx-auto flex justify-between items-center mb-12 relative z-10">
-        <Link to="/collections" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
+      <nav className="max-w-7xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between md:items-center mb-8 sm:mb-12 relative z-10">
+        <Link to="/collections" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors w-fit">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span className="font-medium">Back to Collections</span>
+          <span className="font-medium text-sm sm:text-base">Back to Collections</span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-3 sm:gap-4 w-full md:w-auto">
           {user && (
             <div className="flex items-center gap-3 bg-neutral-900/80 px-4 py-2 rounded-full border border-neutral-800 backdrop-blur-md">
               <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full" />
@@ -81,9 +81,9 @@ export default function CollectionDetailPage() {
         ) : (
           <>
             {/* Collection Header */}
-            <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-8">
+            <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
               <div>
-                <h1 className="text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
                   {collection.name}
                 </h1>
                 <p className="text-neutral-400">
@@ -95,7 +95,7 @@ export default function CollectionDetailPage() {
               {/* Share Button */}
               <button
                 onClick={handleCopyShareLink}
-                className={`flex items-center gap-3 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 flex-shrink-0 ${
+                className={`flex items-center gap-3 px-5 sm:px-6 py-3 rounded-full font-medium text-xs sm:text-sm transition-all duration-300 flex-shrink-0 ${
                   copied
                     ? 'bg-green-600 text-white shadow-lg shadow-green-500/30'
                     : 'bg-neutral-800/80 hover:bg-neutral-700 text-white border border-neutral-700'
@@ -120,8 +120,8 @@ export default function CollectionDetailPage() {
             </div>
 
             {/* Search Bar */}
-            <div className="w-full mb-10 relative group">
-              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+            <div className="w-full mb-8 sm:mb-10 relative group">
+              <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none">
                 <svg className="h-5 w-5 text-neutral-500 group-focus-within:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -131,12 +131,12 @@ export default function CollectionDetailPage() {
                 placeholder="Search videos in this collection..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="block w-full pl-14 pr-5 py-4 bg-neutral-900/60 border border-neutral-800 rounded-2xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 backdrop-blur-xl transition-all"
+                className="block w-full pl-12 sm:pl-14 pr-10 sm:pr-5 py-4 bg-neutral-900/60 border border-neutral-800 rounded-2xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 backdrop-blur-xl transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute inset-y-0 right-0 pr-5 flex items-center text-neutral-500 hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 pr-4 sm:pr-5 flex items-center text-neutral-500 hover:text-white transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -169,7 +169,7 @@ export default function CollectionDetailPage() {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {videos && videos.map((video) => (
                   <div
                     key={video.id}
@@ -185,7 +185,7 @@ export default function CollectionDetailPage() {
                       <button
                         onClick={() => removeVideoMutation.mutate(video.id)}
                         disabled={removeVideoMutation.isPending}
-                        className="absolute top-3 right-3 bg-red-500/80 hover:bg-red-600 backdrop-blur-md p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all shadow-lg disabled:opacity-50"
+                        className="absolute top-3 right-3 bg-red-500/80 hover:bg-red-600 backdrop-blur-md p-2 rounded-full text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-lg disabled:opacity-50"
                         title="Remove from Collection"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -193,8 +193,8 @@ export default function CollectionDetailPage() {
                         </svg>
                       </button>
                     </div>
-                    <div className="p-5">
-                      <h3 className="font-semibold text-white line-clamp-2 leading-snug">
+                    <div className="p-4 sm:p-5">
+                      <h3 className="font-semibold text-white line-clamp-2 leading-snug text-sm sm:text-base">
                         {video.title}
                       </h3>
                     </div>
